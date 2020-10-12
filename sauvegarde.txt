@@ -1,0 +1,107 @@
+//
+            /*
+            Console.WriteLine("Choisissez un type de masque :\n\n1 Notation CIDR (exemple : /24)\n2 Notation décimale pointée (exemple : 255.255.255.0)\n");
+            saisie = Console.ReadLine();
+            while (saisie != "1" && saisie != "2")
+            {
+                Console.Clear();
+                Console.WriteLine(saisieInvalide+"(1 ou 2 sont des choix valides)\n");
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("Choisissez un type de masque\n1 Notation CIDR (exemple : /24)\n2 Notation décimale pointée (exemple : 255.255.255.0)\n");
+                saisie = Console.ReadLine();
+            }
+            Console.Clear();
+            if (saisie == "1") // saisie d'un masque, notation CIDR
+            {
+                do
+                {
+                    formatValide = true;
+                    Console.WriteLine("Saisissez un CIDR (sous la forme d'un nombre compris entre 0 et 32) :\n");
+                    saisie = Console.ReadLine();
+                    while (!Byte.TryParse(saisie, out unCIDR) || unCIDR > 32)
+                    {
+                        Console.Clear();
+                        Console.WriteLine(saisieInvalide);
+                        Console.WriteLine("Saisissez un CIDR (sous la forme d'un nombre compris entre 0 et 32) :\n");
+                        saisie = Console.ReadLine();
+                    }
+                } while (!formatValide);
+                
+                StringBuilder unMasqueBinaire = new StringBuilder();
+                for (Byte i=0; i < 32; i++)
+                {
+                    if (i != 0 && i != 31 && (i+1) % 8 == 0)
+                    {
+                        if (i < unCIDR)
+                        {
+                            unMasqueBinaire.Append("1");
+                            unMasqueBinaire.Append(".");
+                        }
+                        else
+                        {
+                            unMasqueBinaire.Append("0");
+                            unMasqueBinaire.Append(".");
+                        }
+                    }
+                    else
+                    {
+                        if (i < unCIDR)
+                        {
+                            unMasqueBinaire.Append("1");
+                        }
+                        else
+                        {
+                            unMasqueBinaire.Append("0");
+                        }
+                    }
+                }   
+                abcd = unMasqueBinaire.ToString().Split(separateur, 8, StringSplitOptions.None);
+                elementA = Convert.ToByte(abcd[0], 2).ToString();
+                elementB = Convert.ToByte(abcd[1], 2).ToString();
+                elementC = Convert.ToByte(abcd[2], 2).ToString();
+                elementD = Convert.ToByte(abcd[3], 2).ToString();
+                MasqueSaisi = new ipv4(Byte.Parse(elementA), Byte.Parse(elementB), Byte.Parse(elementC), Byte.Parse(elementD));
+            }
+
+            else // saisie d'un masque, notation décimale pointée 
+            {
+                do
+                {
+                    formatValide = true;
+                    Console.WriteLine("Saisissez un masque :\n");
+                    saisie = Console.ReadLine();
+                    try
+                    {
+                        abcd = saisie.Split(separateur, 4, StringSplitOptions.None);
+                        elementA = abcd[0];
+                        elementB = abcd[1];
+                        elementC = abcd[2];
+                        elementD = abcd[3];
+                        MasqueSaisi = new ipv4(Byte.Parse(elementA), Byte.Parse(elementB), Byte.Parse(elementC), Byte.Parse(elementD));
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine(saisieInvalide);
+                        formatValide = false;
+                        Console.ReadKey();
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        Console.WriteLine(saisieInvalide);
+                        formatValide = false;
+                        Console.ReadKey();
+                    }
+                    catch (System.OverflowException)
+                    {
+                        Console.WriteLine(saisieInvalide);
+                        formatValide = false;
+                        Console.ReadKey();
+                    }
+                    finally
+                    {
+                        Console.Clear();
+                    }
+                } while (!formatValide);
+            }
+            return MasqueSaisi;*/
